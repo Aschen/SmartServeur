@@ -39,11 +39,6 @@ public class FlashCodeActivity extends ActionBarActivity implements ZXingScanner
         setContentView(mScannerView);                // Set the scanner view as the content view
 
 
-        RestAdapter adapter = new RestAdapter.Builder()
-                .setEndpoint(SessionService.URL_API)
-                .build();
-
-        _sessionService = adapter.create(SessionService.class);
     }
 
     @Override
@@ -67,24 +62,10 @@ public class FlashCodeActivity extends ActionBarActivity implements ZXingScanner
         {
             int tableId = Integer.parseInt(rawResult.getText().toString());
             Toast.makeText(getApplicationContext(), "id " + tableId, Toast.LENGTH_SHORT).show();
-            _sessionService.createSession(new Session(false, tableId), new Callback<Session>()
-            {
-                @Override
-                public void success(Session session, Response response)
-                {
-                    Intent  accueil = new Intent(FlashCodeActivity.this, AccueilTableActivity.class);
+            Intent  accueil = new Intent(FlashCodeActivity.this, UselessActivity.class);
 
-                    DataHolder.getInstance().sessionId(session.id());
-
-                    startActivity(accueil);
-                }
-
-                @Override
-                public void failure(RetrofitError error)
-                {
-                    Toast.makeText(getApplicationContext(), "Failed : " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+            accueil.putExtra("table_id", tableId);
+            startActivity(accueil);
         }
         catch (Exception e)
         {

@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,16 +14,15 @@
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main" >
         </activity>
-
         <activity
             android:name=".activity.FlashCodeActivity"
             android:label="@string/title_activity_flash_code" >
-            <!--android:parentActivityName=".activity.MainActivity" >-->
-            <!--<meta-data-->
-                <!--android:name="android.support.PARENT_ACTIVITY"-->
-                <!--android:value=".activity.MainActivity" />-->
-        </activity>
 
+            <!-- android:parentActivityName=".activity.MainActivity" > -->
+            <!-- <meta-data -->
+            <!-- android:name="android.support.PARENT_ACTIVITY" -->
+            <!-- android:value=".activity.MainActivity" /> -->
+        </activity>
         <activity
             android:name=".activity.AccueilTableActivity"
             android:label="@string/title_activity_accueil_table"
@@ -33,7 +31,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.FlashCodeActivity" />
         </activity>
-
         <activity
             android:name=".activity.ShowCategoriesActivity"
             android:label="@string/title_activity_show_categories"
@@ -42,7 +39,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.AccueilTableActivity" />
         </activity>
-
         <activity
             android:name=".activity.ShowProductsActivity"
             android:label="@string/title_activity_show_products"
@@ -51,7 +47,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.ShowCategoriesActivity" />
         </activity>
-
         <activity
             android:name=".activity.ShowProductActivity"
             android:label="@string/title_activity_show_product"
@@ -60,7 +55,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.ShowProductsActivity" />
         </activity>
-
         <activity
             android:name=".activity.ShowOrdersActivity"
             android:label="@string/title_activity_show_orders"
@@ -69,8 +63,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.AccueilTableActivity" />
         </activity>
-
-
         <activity
             android:name=".activity.CrudActivity"
             android:label="@string/title_activity_crud"
@@ -86,6 +78,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.aschen.smartserveur.activity.CrudActivity" />
+        </activity>
+        <activity
+            android:name=".activity.UselessActivity"
+            android:label="@string/title_activity_useless" >
         </activity>
     </application>
 
