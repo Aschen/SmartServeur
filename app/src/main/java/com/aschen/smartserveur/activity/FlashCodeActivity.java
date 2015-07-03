@@ -3,6 +3,7 @@ package com.aschen.smartserveur.activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,14 +13,20 @@ import com.aschen.smartserveur.R;
 import com.aschen.smartserveur.model.Session;
 import com.aschen.smartserveur.service.SessionService;
 import com.aschen.smartserveur.tools.DataHolder;
+import com.aschen.smartserveur.tools.ZXingScannerView;
+import com.google.zxing.Result;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class FlashCodeActivity extends ActionBarActivity
+public class FlashCodeActivity extends ActionBarActivity implements ZXingScannerView.ResultHandler
 {
+    private ZXingScannerView mScannerView;
+    private final String TAG = "ScanActivity";
+
+
     private SessionService _sessionService;
 
 
@@ -27,7 +34,9 @@ public class FlashCodeActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_flash_code);
+
+        mScannerView = new ZXingScannerView(this);   // Programmatically initialize the scanner view
+        setContentView(mScannerView);                // Set the scanner view as the content view
 
 
         RestAdapter adapter = new RestAdapter.Builder()
@@ -35,6 +44,45 @@ public class FlashCodeActivity extends ActionBarActivity
                 .build();
 
         _sessionService = adapter.create(SessionService.class);
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        mScannerView.setResultHandler(this); // Register ourselves as a handler for scan results.
+        mScannerView.startCamera();          // Start camera on resume
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mScannerView.stopCamera();           // Stop camera on pause
+    }
+
+    @Override
+    public void handleResult(Result rawResult)
+    {
+        int tableId = Integer.parseInt(rawResult.getText().toString());
+
+        _sessionService.createSession(new Session(false, tableId), new Callback<Session>()
+        {
+            @Override
+            public void success(Session session, Response response)
+            {
+                Intent  accueil = new Intent(FlashCodeActivity.this, AccueilTableActivity.class);
+
+                DataHolder.getInstance().sessionId(session.id());
+
+                startActivity(accueil);
+            }
+
+            @Override
+            public void failure(RetrofitError error)
+            {
+                Toast.makeText(getApplicationContext(), "Failed : " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void Suite(View v)

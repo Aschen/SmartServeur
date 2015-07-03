@@ -3,6 +3,8 @@
     package="com.aschen.smartserveur" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
 
     <application
         android:allowBackup="true"
@@ -16,11 +18,11 @@
 
         <activity
             android:name=".activity.FlashCodeActivity"
-            android:label="@string/title_activity_flash_code"
-            android:parentActivityName=".activity.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.MainActivity" />
+            android:label="@string/title_activity_flash_code" >
+            <!--android:parentActivityName=".activity.MainActivity" >-->
+            <!--<meta-data-->
+                <!--android:name="android.support.PARENT_ACTIVITY"-->
+                <!--android:value=".activity.MainActivity" />-->
         </activity>
 
         <activity
