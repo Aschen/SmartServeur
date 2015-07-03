@@ -63,27 +63,33 @@ public class FlashCodeActivity extends ActionBarActivity implements ZXingScanner
     @Override
     public void handleResult(Result rawResult)
     {
-        int tableId = Integer.parseInt(rawResult.getText().toString());
-
-        _sessionService.createSession(new Session(false, tableId), new Callback<Session>()
+        try
         {
-            @Override
-            public void success(Session session, Response response)
+            int tableId = Integer.parseInt(rawResult.getText().toString());
+            _sessionService.createSession(new Session(false, tableId), new Callback<Session>()
             {
-                Intent  accueil = new Intent(FlashCodeActivity.this, AccueilTableActivity.class);
+                @Override
+                public void success(Session session, Response response)
+                {
+                    Intent  accueil = new Intent(FlashCodeActivity.this, AccueilTableActivity.class);
 
-                DataHolder.getInstance().sessionId(session.id());
+                    DataHolder.getInstance().sessionId(session.id());
 
-                startActivity(accueil);
-            }
+                    startActivity(accueil);
+                }
 
-            @Override
-            public void failure(RetrofitError error)
-            {
-                Toast.makeText(getApplicationContext(), "Failed : " + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+                @Override
+                public void failure(RetrofitError error)
+                {
+                    Toast.makeText(getApplicationContext(), "Failed : " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(FlashCodeActivity.this, "QRCODE invalide", Toast.LENGTH_SHORT).show();
+        }
+     }
 
     public void Suite(View v)
     {
