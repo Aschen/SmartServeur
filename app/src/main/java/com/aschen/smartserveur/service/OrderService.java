@@ -23,6 +23,9 @@ public interface OrderService
     @GET("/orders/from_table/{id}")
     public void getOrderFromTable(@Path("id") Number id, Callback<List<Order>> response);
 
+    @GET("/orders/from_session/{id}")
+    public void getOrderFromSession(@Path("id") Number id, Callback<List<Order>> response);
+
     @POST("/orders.json")
     public void createOrder(@Body Order order, Callback<Order> response);
 

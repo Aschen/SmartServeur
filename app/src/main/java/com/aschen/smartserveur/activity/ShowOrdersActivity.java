@@ -4,16 +4,17 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.aschen.smartserveur.R;
 import com.aschen.smartserveur.adapter.CategoryViewAdapter;
+import com.aschen.smartserveur.adapter.OrderViewAdapter;
 import com.aschen.smartserveur.model.Category;
+import com.aschen.smartserveur.model.Order;
 import com.aschen.smartserveur.service.CategoryService;
-import com.aschen.smartserveur.service.SmartServeurService;
+import com.aschen.smartserveur.service.OrderService;
 import com.aschen.smartserveur.tools.DataHolder;
 
 import java.util.ArrayList;
@@ -24,8 +25,7 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-
-public class ShowCategoriesActivity extends ActionBarActivity
+public class ShowOrdersActivity extends ActionBarActivity
 {
     private RecyclerView    _recyclerView;
 
@@ -33,25 +33,20 @@ public class ShowCategoriesActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_categories);
+        setContentView(R.layout.activity_show_orders);
 
-        _recyclerView = (RecyclerView) findViewById(R.id.categories_recycler_view);
+        _recyclerView = (RecyclerView) findViewById(R.id.order_recycler_view);
 
         /* Get data from webservice */
-        CategoryService categoryService = new RestAdapter.Builder()
-                                        .setEndpoint(CategoryService.URL_API)
-                                        .build().create(CategoryService.class);
-        categoryService.getCategories(new Callback<List<Category>>()
+        OrderService orderService = new RestAdapter.Builder()
+                                        .setEndpoint(OrderService.URL_API)
+                                        .build().create(OrderService.class);
+        orderService.getOrderFromSession(DataHolder.getInstance().sessionId(), new Callback<List<Order>>()
         {
             @Override
-            public void success(List<Category> categories, Response response)
+            public void success(List<Order> orders, Response response)
             {
-                for (Category category : categories)
-                {
-                    category.image(SmartServeurService.URL_API + category.image());
-                }
-
-                _recyclerView.setAdapter(new CategoryViewAdapter(categories));
+                _recyclerView.setAdapter(new OrderViewAdapter(orders));
             }
 
             @Override
@@ -61,8 +56,8 @@ public class ShowCategoriesActivity extends ActionBarActivity
             }
         });
 
-        _recyclerView.setAdapter(new CategoryViewAdapter(new ArrayList<Category>()));
-        _recyclerView.setLayoutManager(new LinearLayoutManager(ShowCategoriesActivity.this));
+        _recyclerView.setAdapter(new OrderViewAdapter(new ArrayList<Order>()));
+        _recyclerView.setLayoutManager(new LinearLayoutManager(ShowOrdersActivity.this));
     }
 
 
@@ -70,7 +65,7 @@ public class ShowCategoriesActivity extends ActionBarActivity
     public boolean onCreateOptionsMenu(Menu menu)
     {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_show_categories, menu);
+        getMenuInflater().inflate(R.menu.menu_show_orders, menu);
         return true;
     }
 

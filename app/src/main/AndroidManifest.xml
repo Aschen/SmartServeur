@@ -13,14 +13,62 @@
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main" >
         </activity>
+
         <activity
-            android:name=".activity.ShowCategoriesActivity"
-            android:label="@string/title_activity_show_categories"
+            android:name=".activity.FlashCodeActivity"
+            android:label="@string/title_activity_flash_code"
             android:parentActivityName=".activity.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="activity.MainActivity" />
+                android:value=".activity.MainActivity" />
         </activity>
+
+        <activity
+            android:name=".activity.AccueilTableActivity"
+            android:label="@string/title_activity_accueil_table"
+            android:parentActivityName=".activity.FlashCodeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.FlashCodeActivity" />
+        </activity>
+
+        <activity
+            android:name=".activity.ShowCategoriesActivity"
+            android:label="@string/title_activity_show_categories"
+            android:parentActivityName=".activity.AccueilTableActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.AccueilTableActivity" />
+        </activity>
+
+        <activity
+            android:name=".activity.ShowProductsActivity"
+            android:label="@string/title_activity_show_products"
+            android:parentActivityName=".activity.ShowCategoriesActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.ShowCategoriesActivity" />
+        </activity>
+
+        <activity
+            android:name=".activity.ShowProductActivity"
+            android:label="@string/title_activity_show_product"
+            android:parentActivityName=".activity.ShowProductsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.ShowProductsActivity" />
+        </activity>
+
+        <activity
+            android:name=".activity.ShowOrdersActivity"
+            android:label="@string/title_activity_show_orders"
+            android:parentActivityName=".activity.AccueilTableActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.AccueilTableActivity" />
+        </activity>
+
+
         <activity
             android:name=".activity.CrudActivity"
             android:label="@string/title_activity_crud"
@@ -36,26 +84,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.aschen.smartserveur.activity.CrudActivity" />
-        </activity>
-        <activity
-            android:name=".activity.ShowProductsActivity"
-            android:label="@string/title_activity_show_products"
-            android:parentActivityName=".activity.ShowCategoriesActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.ShowCategoriesActivity" />
-        </activity>
-        <activity
-            android:name=".activity.ShowProductActivity"
-            android:label="@string/title_activity_show_product"
-            android:parentActivityName=".activity.ShowProductsActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aschen.smartserveur.activity.ShowProductsActivity" />
-        </activity>
-        <activity
-            android:name=".activity.MainActivity2Activity"
-            android:label="@string/title_activity_main_activity2" >
         </activity>
     </application>
 
