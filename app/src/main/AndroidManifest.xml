@@ -12,7 +12,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".activity.MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait">>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +21,8 @@
             </intent-filter>        </activity>
         <activity
             android:name=".activity.FlashCodeActivity"
-            android:label="@string/title_activity_flash_code" >
+            android:label="@string/title_activity_flash_code"
+            android:screenOrientation="portrait">>
 
             <!-- android:parentActivityName=".activity.MainActivity" > -->
             <!-- <meta-data -->
@@ -30,7 +32,8 @@
         <activity
             android:name=".activity.AccueilTableActivity"
             android:label="@string/title_activity_accueil_table"
-            android:parentActivityName=".activity.FlashCodeActivity" >
+            android:parentActivityName=".activity.FlashCodeActivity"
+            android:screenOrientation="portrait">>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.FlashCodeActivity" />
@@ -38,7 +41,8 @@
         <activity
             android:name=".activity.ShowCategoriesActivity"
             android:label="@string/title_activity_show_categories"
-            android:parentActivityName=".activity.AccueilTableActivity" >
+            android:parentActivityName=".activity.AccueilTableActivity"
+            android:screenOrientation="portrait">>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.AccueilTableActivity" />
@@ -46,7 +50,8 @@
         <activity
             android:name=".activity.ShowProductsActivity"
             android:label="@string/title_activity_show_products"
-            android:parentActivityName=".activity.ShowCategoriesActivity" >
+            android:parentActivityName=".activity.ShowCategoriesActivity"
+            android:screenOrientation="portrait">>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.ShowCategoriesActivity" />
@@ -54,7 +59,8 @@
         <activity
             android:name=".activity.ShowProductActivity"
             android:label="@string/title_activity_show_product"
-            android:parentActivityName=".activity.ShowProductsActivity" >
+            android:parentActivityName=".activity.ShowProductsActivity"
+            android:screenOrientation="portrait">>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.ShowProductsActivity" />
@@ -62,7 +68,8 @@
         <activity
             android:name=".activity.ShowOrdersActivity"
             android:label="@string/title_activity_show_orders"
-            android:parentActivityName=".activity.AccueilTableActivity" >
+            android:parentActivityName=".activity.AccueilTableActivity"
+            android:screenOrientation="portrait">>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.AccueilTableActivity" />
@@ -70,7 +77,8 @@
         <activity
             android:name=".activity.CrudActivity"
             android:label="@string/title_activity_crud"
-            android:parentActivityName=".activity.MainActivity" >
+            android:parentActivityName=".activity.MainActivity"
+            android:screenOrientation="portrait">>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="activity.MainActivity" />
@@ -78,14 +86,11 @@
         <activity
             android:name=".activity.ProductsActivity"
             android:label="@string/title_activity_products"
-            android:parentActivityName=".activity.CrudActivity" >
+            android:parentActivityName=".activity.CrudActivity"
+            android:screenOrientation="portrait">>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.aschen.smartserveur.activity.CrudActivity" />
-        </activity>
-        <activity
-            android:name=".activity.UselessActivity"
-            android:label="@string/title_activity_useless" >
         </activity>
     </application>
 

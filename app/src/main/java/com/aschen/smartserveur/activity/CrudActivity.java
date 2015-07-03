@@ -51,4 +51,92 @@ public class CrudActivity extends ActionBarActivity
 
         startActivity(intent);
     }
+
+//    public void ShowCategories(View v)
+//    {
+//        Intent showCategories = new Intent(MainActivity.this, ShowCategoriesActivity.class);
+//
+//        startActivity(showCategories);
+//    }
+//
+//    public void GetSession(View v)
+//    {
+//        _serviceApi.getSession(21, new Callback<Session>()
+//        {
+//            @Override
+//            public void success(Session session, Response response)
+//            {
+//                _id.setText(session.id() + "");
+//                _name.setText(session.table_id() + "");
+//                _imageUrl.setText(session.expired() == true ? "Expiré" : "Valide");
+//            }
+//
+//            @Override
+//            public void failure(RetrofitError error)
+//            {
+//
+//            }
+//        });
+//    }
+//
+//    public void UpdateSession(View v)
+//    {
+//        Session session = new Session(true, 2);
+//        session.id(21);
+//
+//        _serviceApi.updateSession(session.id(), session, new Callback<Session>()
+//        {
+//            @Override
+//            public void success(Session session, Response response)
+//            {
+//                _id.setText("Success");
+//            }
+//
+//            @Override
+//            public void failure(RetrofitError error)
+//            {
+//                _id.setText(error.getMessage());
+//            }
+//        });
+//    }
+//
+//    public void deleteSession(View v)
+//    {
+//        _serviceApi.deleteSession(21, new Callback<Session>()
+//        {
+//            @Override
+//            public void success(Session session, Response response)
+//            {
+//                _id.setText("Success");
+//            }
+//
+//            @Override
+//            public void failure(RetrofitError error)
+//            {
+//                _id.setText(error.getMessage());
+//            }
+//        });
+//    }
+//
+//    public void CreateSession(View v)
+//    {
+//        Session session = new Session(false, 60);
+//
+//        _serviceApi.createSession(session, new Callback<Session>()
+//        {
+//            @Override
+//            public void success(Session session, Response response)
+//            {
+//                _id.setText(session.id() + "");
+//                _name.setText(session.table_id() + "");
+//                _imageUrl.setText(session.expired() == true ? "Expiré" : "Valide");
+//            }
+//
+//            @Override
+//            public void failure(RetrofitError error)
+//            {
+//                _id.setText(error.getMessage());
+//            }
+//        });
+//    }
 }

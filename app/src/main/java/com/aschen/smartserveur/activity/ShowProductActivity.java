@@ -95,7 +95,7 @@ public class ShowProductActivity extends ActionBarActivity
 
     public void Enlever(View v)
     {
-        _productQuantity -= 1;
+        _productQuantity = (_productQuantity - 1) < 0 ? 0 : _productQuantity - 1;
         _quantity.setText(_productQuantity + "");
     }
 
