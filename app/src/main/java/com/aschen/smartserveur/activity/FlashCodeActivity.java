@@ -18,6 +18,8 @@ import com.aschen.smartserveur.tools.DataHolder;
 import com.aschen.smartserveur.tools.ZXingScannerView;
 import com.google.zxing.Result;
 
+import java.util.List;
+
 import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
@@ -72,12 +74,12 @@ public class FlashCodeActivity extends ActionBarActivity implements ZXingScanner
         {
             int tableNumber = Integer.parseInt(rawResult.getText().toString());
 
-            _tableService.getTableFromNumber(tableNumber, new Callback<Table>()
+            _tableService.getTableFromNumber(tableNumber, new Callback<List<Table>>()
             {
                 @Override
-                public void success(Table table, Response response)
+                public void success(List<Table> table, Response response)
                 {
-                    _sessionService.createSession(new Session(false, table.id()), new Callback<Session>()
+                    _sessionService.createSession(new Session(false, table.get(0).id()), new Callback<Session>()
                     {
                         @Override
                         public void success(Session session, Response response)

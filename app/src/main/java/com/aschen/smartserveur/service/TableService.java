@@ -18,5 +18,5 @@ public interface TableService
     public static final String URL_API = "http://rails.aschen.ovh/";
 
     @GET("/tables/from_number/{id}")
-    public void getTableFromNumber(@Path("id") Number id, Callback<Table> response);
+    public void getTableFromNumber(@Path("id") Number id, Callback<List<Table>> response);
 }
