@@ -66,6 +66,7 @@ public class FlashCodeActivity extends ActionBarActivity implements ZXingScanner
         try
         {
             int tableId = Integer.parseInt(rawResult.getText().toString());
+            Toast.makeText(getApplicationContext(), "id " + tableId, Toast.LENGTH_SHORT).show();
             _sessionService.createSession(new Session(false, tableId), new Callback<Session>()
             {
                 @Override
