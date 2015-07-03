@@ -11,7 +11,9 @@ import android.widget.Toast;
 
 import com.aschen.smartserveur.R;
 import com.aschen.smartserveur.model.Session;
+import com.aschen.smartserveur.model.Table;
 import com.aschen.smartserveur.service.SessionService;
+import com.aschen.smartserveur.service.TableService;
 import com.aschen.smartserveur.tools.DataHolder;
 import com.aschen.smartserveur.tools.ZXingScannerView;
 import com.google.zxing.Result;
@@ -27,8 +29,8 @@ public class FlashCodeActivity extends ActionBarActivity implements ZXingScanner
     private final String TAG = "ScanActivity";
 
 
-    private SessionService _sessionService;
-
+    private SessionService  _sessionService;
+    private TableService    _tableService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -38,7 +40,15 @@ public class FlashCodeActivity extends ActionBarActivity implements ZXingScanner
         mScannerView = new ZXingScannerView(this);   // Programmatically initialize the scanner view
         setContentView(mScannerView);                // Set the scanner view as the content view
 
+        RestAdapter adapter = new RestAdapter.Builder()
+                .setEndpoint(SessionService.URL_API)
+                .build();
+        _sessionService = adapter.create(SessionService.class);
 
+        RestAdapter adapter2 = new RestAdapter.Builder()
+                .setEndpoint(TableService.URL_API)
+                .build();
+        _tableService = adapter2.create(TableService.class);
     }
 
     @Override
@@ -60,12 +70,39 @@ public class FlashCodeActivity extends ActionBarActivity implements ZXingScanner
     {
         try
         {
-            int tableId = Integer.parseInt(rawResult.getText().toString());
-            Toast.makeText(getApplicationContext(), "id " + tableId, Toast.LENGTH_SHORT).show();
-            Intent  accueil = new Intent(FlashCodeActivity.this, UselessActivity.class);
+            int tableNumber = Integer.parseInt(rawResult.getText().toString());
 
-            accueil.putExtra("table_id", tableId);
-            startActivity(accueil);
+            _tableService.getTableFromNumber(tableNumber, new Callback<Table>()
+            {
+                @Override
+                public void success(Table table, Response response)
+                {
+                    _sessionService.createSession(new Session(false, table.id()), new Callback<Session>()
+                    {
+                        @Override
+                        public void success(Session session, Response response)
+                        {
+                            Intent accueil = new Intent(FlashCodeActivity.this, AccueilTableActivity.class);
+
+                            DataHolder.getInstance().sessionId(session.id());
+
+                            startActivity(accueil);
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error)
+                        {
+                            Toast.makeText(getApplicationContext(), "Failed : " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+                @Override
+                public void failure(RetrofitError error)
+                {
+                    Toast.makeText(getApplicationContext(), "Failed : " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
         catch (Exception e)
         {
