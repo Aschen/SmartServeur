@@ -9,43 +9,25 @@
                 android:orientation="vertical"
                 tools:context="com.aschen.smartserveur.activity.MainActivity">
 
-    <Button
-        android:text="@string/button_text"
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="GetCategories"/>
+        android:src="@drawable/serveur"/>
 
     <Button
-        android:text="@string/button_categories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="ShowCategories"/>
+        android:text="@string/main_button_start"
+        android:onClick="Flasher"/>
 
-    <Button
-        android:text="@string/button_create_session"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="CreateSession"/>
-
-    <TextView
-        android:id="@+id/category_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-
-    <TextView
-        android:id="@+id/category_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/category_image_url"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:id="@+id/main_session_id"/>
 
     <ImageView
-        android:id="@+id/category_image"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:src="@drawable/serveur"/>
 
 </LinearLayout>

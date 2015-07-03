@@ -12,8 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aschen.smartserveur.R;
+import com.aschen.smartserveur.model.Order;
 import com.aschen.smartserveur.model.Product;
+import com.aschen.smartserveur.service.CategoryService;
+import com.aschen.smartserveur.service.OrderService;
 import com.aschen.smartserveur.service.ProductService;
+import com.aschen.smartserveur.tools.DataHolder;
 import com.squareup.picasso.Picasso;
 
 import retrofit.Callback;
@@ -25,6 +29,8 @@ public class ShowProductActivity extends ActionBarActivity
 {
     private int             _productId;
     private int             _productQuantity = 0;
+
+    private OrderService    _orderService;
 
     private TextView        _name;
     private TextView        _description;
@@ -51,6 +57,11 @@ public class ShowProductActivity extends ActionBarActivity
         {
             _productId = extras.getInt("product_id");
         }
+
+        /* Get order service */
+        _orderService = new RestAdapter.Builder()
+                        .setEndpoint(OrderService.URL_API)
+                        .build().create(OrderService.class);
 
         ProductService productService = new RestAdapter.Builder()
                                         .setEndpoint(ProductService.URL_API)
@@ -90,7 +101,23 @@ public class ShowProductActivity extends ActionBarActivity
 
     public void Commander(View v)
     {
-        Toast.makeText(getApplicationContext(), "Commande de " + _productQuantity + " " + _name.getText(), Toast.LENGTH_SHORT).show();
+        _orderService.createOrder(new Order(_productQuantity, DataHolder.getInstance().sessionId(), _productId, false), new Callback<Order>()
+        {
+            @Override
+            public void success(Order order, Response response)
+            {
+                Toast.makeText(getApplicationContext(), "Commande de " + _productQuantity + " " + _name.getText(), Toast.LENGTH_SHORT).show();
+                _productQuantity = 0;
+                _quantity.setText("0");
+            }
+
+            @Override
+            public void failure(RetrofitError error)
+            {
+                Toast.makeText(getApplicationContext(), "Erreur : " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override

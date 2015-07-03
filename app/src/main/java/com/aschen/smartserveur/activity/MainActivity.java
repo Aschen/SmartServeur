@@ -6,17 +6,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aschen.smartserveur.R;
 import com.aschen.smartserveur.model.Session;
 import com.aschen.smartserveur.service.SessionService;
-import com.aschen.smartserveur.service.SmartServeurService;
-import com.aschen.smartserveur.model.ApiClient;
-import com.squareup.picasso.Picasso;
+import com.aschen.smartserveur.tools.DataHolder;
 
-import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -26,9 +22,7 @@ import retrofit.client.Response;
 
 public class MainActivity extends ActionBarActivity
 {
-    private TextView  _name, _id, _imageUrl;
-    private ImageView _image;
-    private SmartServeurService _serviceApi;
+    private SessionService  _sessionService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -36,46 +30,122 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        _id = (TextView) findViewById(R.id.category_id);
-        _name = (TextView) findViewById(R.id.category_name);
-        _image = (ImageView) findViewById(R.id.category_image);
-        _imageUrl = (TextView) findViewById(R.id.category_image_url);
-
         RestAdapter     adapter = new RestAdapter.Builder()
                                 .setEndpoint(SessionService.URL_API)
                                 .build();
 
-        _serviceApi = adapter.create(SmartServeurService.class);
+        _sessionService = adapter.create(SessionService.class);
     }
 
-
-    public void GetCategories(View v)
+    public void Flasher(View v)
     {
-        Callback callback = new Callback()
+        _sessionService.createSession(new Session(false, 1), new Callback<Session>()
         {
             @Override
-            public void success(Object o, Response response)
+            public void success(Session session, Response response)
             {
-                for (ApiClient.Category c : (List<ApiClient.Category>) o)
-                {
-                    _id.setText(c.id + "");
-                    _name.setText(c.name);
-                    _imageUrl.setText(c.image);
-                    Picasso.with(getApplicationContext()).load(c.image).into(_image);
-                }
+                Intent  flasher = new Intent(MainActivity.this, ShowCategoriesActivity.class);
 
+                DataHolder.getInstance().sessionId(session.id());
+                startActivity(flasher);
             }
 
             @Override
-            public void failure(RetrofitError retrofitError)
+            public void failure(RetrofitError error)
             {
-                _id.setText(retrofitError.getUrl());
-                _name.setText(retrofitError.getMessage());
+                Toast.makeText(getApplicationContext(), "Failed : " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        };
-
-        _serviceApi.getCategories(callback);
+        });
     }
+
+
+//    public void ShowCategories(View v)
+//    {
+//        Intent showCategories = new Intent(MainActivity.this, ShowCategoriesActivity.class);
+//
+//        startActivity(showCategories);
+//    }
+//
+//    public void GetSession(View v)
+//    {
+//        _serviceApi.getSession(21, new Callback<Session>()
+//        {
+//            @Override
+//            public void success(Session session, Response response)
+//            {
+//                _id.setText(session.id() + "");
+//                _name.setText(session.table_id() + "");
+//                _imageUrl.setText(session.expired() == true ? "Expiré" : "Valide");
+//            }
+//
+//            @Override
+//            public void failure(RetrofitError error)
+//            {
+//
+//            }
+//        });
+//    }
+//
+//    public void UpdateSession(View v)
+//    {
+//        Session session = new Session(true, 2);
+//        session.id(21);
+//
+//        _serviceApi.updateSession(session.id(), session, new Callback<Session>()
+//        {
+//            @Override
+//            public void success(Session session, Response response)
+//            {
+//                _id.setText("Success");
+//            }
+//
+//            @Override
+//            public void failure(RetrofitError error)
+//            {
+//                _id.setText(error.getMessage());
+//            }
+//        });
+//    }
+//
+//    public void deleteSession(View v)
+//    {
+//        _serviceApi.deleteSession(21, new Callback<Session>()
+//        {
+//            @Override
+//            public void success(Session session, Response response)
+//            {
+//                _id.setText("Success");
+//            }
+//
+//            @Override
+//            public void failure(RetrofitError error)
+//            {
+//                _id.setText(error.getMessage());
+//            }
+//        });
+//    }
+//
+//    public void CreateSession(View v)
+//    {
+//        Session session = new Session(false, 60);
+//
+//        _serviceApi.createSession(session, new Callback<Session>()
+//        {
+//            @Override
+//            public void success(Session session, Response response)
+//            {
+//                _id.setText(session.id() + "");
+//                _name.setText(session.table_id() + "");
+//                _imageUrl.setText(session.expired() == true ? "Expiré" : "Valide");
+//            }
+//
+//            @Override
+//            public void failure(RetrofitError error)
+//            {
+//                _id.setText(error.getMessage());
+//            }
+//        });
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -100,93 +170,5 @@ public class MainActivity extends ActionBarActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void ShowCategories(View v)
-    {
-        Intent showCategories = new Intent(MainActivity.this, ShowCategoriesActivity.class);
-
-        startActivity(showCategories);
-    }
-
-    public void GetSession(View v)
-    {
-        _serviceApi.getSession(21, new Callback<Session>()
-        {
-            @Override
-            public void success(Session session, Response response)
-            {
-                _id.setText(session.id() + "");
-                _name.setText(session.table_id() + "");
-                _imageUrl.setText(session.expired() == true ? "Expiré" : "Valide");
-            }
-
-            @Override
-            public void failure(RetrofitError error)
-            {
-
-            }
-        });
-    }
-
-    public void UpdateSession(View v)
-    {
-        Session session = new Session(true, 2);
-        session.id(21);
-
-        _serviceApi.updateSession(session.id(), session, new Callback<Session>()
-        {
-            @Override
-            public void success(Session session, Response response)
-            {
-                _id.setText("Success");
-            }
-
-            @Override
-            public void failure(RetrofitError error)
-            {
-                _id.setText(error.getMessage());
-            }
-        });
-    }
-
-    public void deleteSession(View v)
-    {
-        _serviceApi.deleteSession(21, new Callback<Session>()
-        {
-            @Override
-            public void success(Session session, Response response)
-            {
-                _id.setText("Success");
-            }
-
-            @Override
-            public void failure(RetrofitError error)
-            {
-                _id.setText(error.getMessage());
-            }
-        });
-    }
-
-    public void CreateSession(View v)
-    {
-        Session session = new Session(false, 60);
-
-        _serviceApi.createSession(session, new Callback<Session>()
-        {
-            @Override
-            public void success(Session session, Response response)
-            {
-                _id.setText(session.id() + "");
-                _name.setText(session.table_id() + "");
-                _imageUrl.setText(session.expired() == true ? "Expiré" : "Valide");
-            }
-
-            @Override
-            public void failure(RetrofitError error)
-            {
-                _id.setText(error.getMessage());
-            }
-        });
     }
 }

@@ -12,7 +12,9 @@ import android.widget.Toast;
 import com.aschen.smartserveur.R;
 import com.aschen.smartserveur.adapter.CategoryViewAdapter;
 import com.aschen.smartserveur.model.Category;
+import com.aschen.smartserveur.service.CategoryService;
 import com.aschen.smartserveur.service.SmartServeurService;
+import com.aschen.smartserveur.tools.DataHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +27,7 @@ import retrofit.client.Response;
 
 public class ShowCategoriesActivity extends ActionBarActivity
 {
-    private RecyclerView            _recyclerView;
+    private RecyclerView    _recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -36,9 +38,9 @@ public class ShowCategoriesActivity extends ActionBarActivity
         _recyclerView = (RecyclerView) findViewById(R.id.categories_recycler_view);
 
         /* Get data from webservice */
-        SmartServeurService ssService = new RestAdapter.Builder()
-                                        .setEndpoint(SmartServeurService.URL_API)
-                                        .build().create(SmartServeurService.class);
+        CategoryService ssService = new RestAdapter.Builder()
+                                        .setEndpoint(CategoryService.URL_API)
+                                        .build().create(CategoryService.class);
         ssService.getCategories(new Callback<List<Category>>()
         {
             @Override

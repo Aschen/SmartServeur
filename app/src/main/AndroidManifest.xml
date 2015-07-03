@@ -53,6 +53,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.aschen.smartserveur.activity.ShowProductsActivity" />
         </activity>
+        <activity
+            android:name=".activity.MainActivity2Activity"
+            android:label="@string/title_activity_main_activity2" >
+        </activity>
     </application>
 
 </manifest>
