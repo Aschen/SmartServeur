@@ -20,6 +20,12 @@
         android:text="@string/main_button_start"
         android:onClick="Flasher"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_button_dev"
+        android:onClick="Dev"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

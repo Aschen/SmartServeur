@@ -46,6 +46,10 @@ public class ShowOrdersActivity extends ActionBarActivity
             @Override
             public void success(List<Order> orders, Response response)
             {
+                for (Order order : orders)
+                {
+                    order.product().image(OrderService.URL_API + order.product().image());
+                }
                 _recyclerView.setAdapter(new OrderViewAdapter(orders));
             }
 

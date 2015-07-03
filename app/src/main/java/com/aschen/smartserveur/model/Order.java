@@ -11,6 +11,9 @@ public class Order
     private Number  product_id;
     private boolean served;
 
+    /* Optionnal */
+    private Product product;
+
     public Order(Number nQuantity, Number nSessionId, Number nProductId, boolean nServed)
     {
         quantity = nQuantity;
@@ -33,4 +36,6 @@ public class Order
 
     public boolean served() { return served; }
     public void served(boolean nServed) { served = nServed; }
+
+    public Product product() { return product; }
 }
