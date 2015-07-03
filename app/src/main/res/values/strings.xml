@@ -5,4 +5,14 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="button_text">Pull</string>
+    <string name="button_categories">Catégories</string>
+    <string name="title_activity_show_categories">ShowCategories</string>
+    <string name="button_create_session">Session</string>
+    <string name="title_activity_crud">CrudActivity</string>
+    <string name="button_crud_products">Produits</string>
+    <string name="title_activity_products">ProductsActivity</string>
+    <string name="button_products_get">Tous les produits</string>
+    <string name="title_activity_show_products">ShowProducts</string>
+    <string name="title_activity_show_product">ShowProductActivity</string>
+    <string name="show_product_button">Commander</string>
 </resources>

@@ -10,8 +10,48 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/title_activity_main" >
+        </activity>
+        <activity
+            android:name=".activity.ShowCategoriesActivity"
+            android:label="@string/title_activity_show_categories"
+            android:parentActivityName=".activity.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="activity.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activity.CrudActivity"
+            android:label="@string/title_activity_crud"
+            android:parentActivityName=".activity.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="activity.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activity.ProductsActivity"
+            android:label="@string/title_activity_products"
+            android:parentActivityName=".activity.CrudActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.aschen.smartserveur.activity.CrudActivity" />
+        </activity>
+        <activity
+            android:name=".activity.ShowProductsActivity"
+            android:label="@string/title_activity_show_products"
+            android:parentActivityName=".activity.ShowCategoriesActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.ShowCategoriesActivity" />
+        </activity>
+        <activity
+            android:name=".activity.ShowProductActivity"
+            android:label="@string/title_activity_show_product"
+            android:parentActivityName=".activity.ShowProductsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.aschen.smartserveur.activity.ShowProductsActivity" />
         </activity>
     </application>
 
