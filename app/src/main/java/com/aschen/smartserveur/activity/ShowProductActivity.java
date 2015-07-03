@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,10 +24,12 @@ import retrofit.client.Response;
 public class ShowProductActivity extends ActionBarActivity
 {
     private int             _productId;
+    private int             _productQuantity = 0;
 
     private TextView        _name;
     private TextView        _description;
     private TextView        _price;
+    private EditText        _quantity;
     private ImageView       _image;
 
     @Override
@@ -39,6 +42,9 @@ public class ShowProductActivity extends ActionBarActivity
         _description = (TextView) findViewById(R.id.show_product_description);
         _price = (TextView) findViewById(R.id.show_product_price);
         _image = (ImageView) findViewById(R.id.show_product_image);
+        _quantity = (EditText) findViewById(R.id.show_product_quantity);
+
+        _quantity.setFocusable(false);
 
         Bundle  extras = getIntent().getExtras();
         if (extras != null)
@@ -70,9 +76,21 @@ public class ShowProductActivity extends ActionBarActivity
         });
     }
 
+    public void Ajouter(View v)
+    {
+        _productQuantity += 1;
+        _quantity.setText(_productQuantity + "");
+    }
+
+    public void Enlever(View v)
+    {
+        _productQuantity -= 1;
+        _quantity.setText(_productQuantity + "");
+    }
+
     public void Commander(View v)
     {
-
+        Toast.makeText(getApplicationContext(), "Commande de " + _productQuantity + " " + _name.getText(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

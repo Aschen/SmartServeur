@@ -15,4 +15,6 @@
     <string name="title_activity_show_products">ShowProducts</string>
     <string name="title_activity_show_product">ShowProductActivity</string>
     <string name="show_product_button">Commander</string>
+    <string name="show_product_button_add">Ajouter</string>
+    <string name="show_product_button_del">Retirer</string>
 </resources>
