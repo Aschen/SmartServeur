@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  expired: false
-  table_id: MyString
-
-two:
-  expired: false
-  table_id: MyString
