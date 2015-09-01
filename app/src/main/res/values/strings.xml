@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">SmartServeur</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="button_text">Pull</string>
+    <string name="button_categories">Catégories</string>
+    <string name="title_activity_show_categories">ShowCategories</string>
+    <string name="button_create_session">Session</string>
+    <string name="title_activity_crud">CrudActivity</string>
+    <string name="button_crud_products">Produits</string>
+    <string name="title_activity_products">ProductsActivity</string>
+    <string name="button_products_get">Tous les produits</string>
+    <string name="title_activity_show_products">ShowProducts</string>
+    <string name="title_activity_show_product">ShowProductActivity</string>
+    <string name="show_product_button">Commander</string>
+    <string name="show_product_button_add">Ajouter</string>
+    <string name="show_product_button_del">Retirer</string>
+    <string name="main_button_start">Flasher le QR-Code</string>
+    <string name="title_activity_main_activity2">MainActivity2Activity</string>
+    <string name="title_activity_accueil_table">AccueilTableActivity</string>
+    <string name="title_activity_flash_code">FlashCodeActivity</string>
+    <string name="accueil_table_button_categories">Afficher la carte</string>
+    <string name="accueil_table_button_commandes">Mes commandes</string>
+    <string name="title_activity_show_orders">ShowOrdersActivity</string>
+    <string name="order_item_button_text">Annuler</string>
+    <string name="main_button_dev">Developer</string>
+    <string name="title_activity_useless">UselessActivity</string>
+    <string name="accueil_table_button_quitter">Partir</string>
+</resources>
