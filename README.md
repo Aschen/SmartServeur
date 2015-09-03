@@ -19,3 +19,7 @@ You can now order some food or drink without ask the waiter to come take your or
 * You can create your restaurant table to manage the serving.
 * You can order product through the application without moving from your seat, the waiter will receive your order on a website which use the API to display current orders.
 
+![alt text](https://github.com/Aschen/SmartServeur/raw/master/screenshots/liste_categories.jpg "Liste des catégories")
+![alt text](https://github.com/Aschen/SmartServeur/raw/master/screenshots/liste_produits.jpg "Liste des produits")
+![alt text](https://github.com/Aschen/SmartServeur/raw/master/screenshots/commander_produit.jpg "Commander un produit")
+![alt text](https://github.com/Aschen/SmartServeur/raw/master/screenshots/liste_commande.jpg "Liste des commandes")
