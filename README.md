@@ -4,7 +4,7 @@ SmartServeur is a application for remote ordering in restaurant.
 
 This is a school project and most of the application and API code has been written in a 24h rush by myself.
 
-The Android application use a API written in Rails (Here)[https://github.com/aschen/smartserveur-api].
+The Android application use a API written in Rails https://github.com/aschen/smartserveur-api .
 
 ## Features
 
